@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enlisted Mobile - التحميل الرسمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Enlisted Mobile | الموقع الرسمي للعبة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #ff4500;
-            --accent: #eab308;
-            --bg: #05070a;
-            --card-bg: rgba(12, 17, 29, 0.9);
-            --text: #f8fafc;
+            --primary-glow: rgba(255, 69, 0, 0.6);
+            --secondary: #eab308;
+            --bg-dark: #04060a;
+            --card-bg: rgba(13, 18, 30, 0.75);
+            --border-glow: rgba(255, 69, 0, 0.3);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
         * {
@@ -19,247 +23,323 @@
             margin: 0;
             padding: 0;
             font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            background: radial-gradient(circle at 50% 10%, rgba(255, 69, 0, 0.2), transparent 60%),
-                        radial-gradient(circle at 50% 90%, rgba(15, 23, 42, 0.9), #05070a);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 69, 0, 0.25), transparent 70%),
+                radial-gradient(circle at 80% 80%, rgba(234, 179, 8, 0.1), transparent 50%),
+                radial-gradient(circle at 10% 90%, rgba(0, 0, 0, 0.9), transparent 80%);
             background-attachment: fixed;
         }
 
-        .main-card {
+        /* Navbar Header */
+        .navbar {
             width: 100%;
-            max-width: 480px;
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 69, 0, 0.3);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(255, 69, 0, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(4, 6, 10, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .hero-header {
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 1000;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .audio-pill {
+            background: rgba(255, 69, 0, 0.15);
+            border: 1px solid var(--primary);
+            padding: 6px 14px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
             position: relative;
-            height: 230px;
-            overflow: hidden;
-        }
-
-        .hero-header img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: 320px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(0deg, rgba(12, 17, 29, 1) 0%, rgba(12, 17, 29, 0.3) 60%, transparent 100%);
+            background: linear-gradient(0deg, var(--bg-dark) 0%, rgba(4, 6, 10, 0.4) 60%, transparent 100%);
         }
 
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.75);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 4px 14px;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 1000;
+            letter-spacing: 2px;
+            text-shadow: 0 0 25px var(--primary-glow), 0 4px 10px #000;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Container & Grid */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* CTA Download Section */
+        .download-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
             border-radius: 20px;
-            font-size: 11px;
-            font-weight: 900;
-            text-shadow: 0 0 5px var(--primary);
-        }
-
-        .content {
-            padding: 20px 24px;
-        }
-
-        .game-title {
-            font-size: 32px;
-            font-weight: 900;
+            padding: 25px;
             text-align: center;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
-            margin-bottom: 6px;
-            letter-spacing: 1px;
-        }
-
-        .game-desc {
-            color: #94a3b8;
-            font-size: 13px;
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .spec-box {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 10px 5px;
-            border-radius: 14px;
-            text-align: center;
-        }
-
-        .spec-label {
-            font-size: 10.5px;
-            color: #64748b;
-            display: block;
-        }
-
-        .spec-value {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .section-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #e2e8f0;
-            margin-bottom: 10px;
-        }
-
-        .gallery {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        .gallery::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .gallery::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        .gallery img {
-            width: 140px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            flex-shrink: 0;
-        }
-
-        .audio-player {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .audio-info {
-            font-size: 12px;
-            color: #cbd5e1;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 69, 0, 0.15);
+            margin-bottom: 30px;
         }
 
         .download-btn {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #ff4500 0%, #ff6b00 100%);
-            color: #ffffff;
+            max-width: 400px;
+            padding: 18px 30px;
+            background: linear-gradient(135deg, #ff4500, #ff6b00);
+            color: #fff;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
-            border-radius: 16px;
-            box-shadow: 0 6px 25px rgba(255, 69, 0, 0.5);
-            transition: all 0.2s ease;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .download-btn:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
+        }
+
+        /* Specs Bar */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .spec-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 15px 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .spec-icon {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .spec-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .spec-val {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        /* Screenshots Section */
+        .section-header {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .section-header i {
+            color: var(--primary);
+        }
+
+        .gallery-scroller {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        .gallery-card {
+            min-width: 260px;
+            height: 150px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
         }
 
         .footer {
             text-align: center;
-            font-size: 11px;
+            padding: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 12px;
             color: #475569;
-            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <div class="hero-header">
-            <span class="badge">الأندرويد 10+</span>
-            <!-- صورة الغلاف السوفيتية -->
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Enlisted Banner">
-            <div class="hero-overlay"></div>
+    <!-- Header Navbar -->
+    <nav class="navbar">
+        <div class="brand-logo">
+            <i class="fa-solid fa-shield-halved"></i>
+            ENLISTED
+        </div>
+        <div class="audio-pill">
+            <i class="fa-solid fa-music"></i>
+            <span>أخبار أهرام جمهورية</span>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">ENLISTED MOBILE</h1>
+            <p class="hero-subtitle">معارك الحرب العالمية الثانية الواقعية – الجيل الجديد على الهواتف</p>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-container">
+
+        <!-- Music Audio Player Custom -->
+        <div style="background: rgba(0,0,0,0.5); padding: 12px 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-compact-disc fa-spin" style="color: var(--primary); font-size: 20px;"></i>
+                <span style="font-size: 13px; font-weight: 700;">الموسيقى: مجدي الزهار - أخبار أهرام جمهورية</span>
+            </div>
+            <!-- مشغل الأغنية -->
+            <audio controls style="height: 32px; max-width: 180px;">
+                <source src="https://dndnha.cam/music/akhbar-ahram-aljmhwryh" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت.
+            </audio>
         </div>
 
-        <div class="content">
-            <h1 class="game-title">ENLISTED MOBILE</h1>
-            <p class="game-desc">خوض معارك الحرب العالمية الثانية برسمات واقعية خارقة وحروب فصائل ضخمة على هاتفك المحمول.</p>
-
-            <!-- المواصفات المطلوبة -->
-            <div class="specs-grid">
-                <div class="spec-box">
-                    <span class="spec-label">المساحة</span>
-                    <span class="spec-value">4 GB</span>
-                </div>
-                <div class="spec-box">
-                    <span class="spec-label">الرام المطلوب</span>
-                    <span class="spec-value">6 GB</span>
-                </div>
-                <div class="spec-box">
-                    <span class="spec-label">النظام</span>
-                    <span class="spec-value">Android 10+</span>
-                </div>
+        <!-- Specs Grid -->
+        <div class="specs-grid">
+            <div class="spec-card">
+                <i class="fa-solid fa-microchip spec-icon"></i>
+                <span class="spec-label">الرام المطلوب</span>
+                <span class="spec-val">6 GB</span>
             </div>
-
-            <!-- الموسيقى الحماسية -->
-            <div class="audio-player">
-                <span class="audio-info">🎵 موسيقى المعركة (Epic Theme)</span>
-                <audio controls style="height: 30px; width: 160px;">
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                </audio>
+            <div class="spec-card">
+                <i class="fa-brands fa-android spec-icon"></i>
+                <span class="spec-label">النظام الأدنى</span>
+                <span class="spec-val">Android 10+</span>
             </div>
-
-            <!-- لقطات الشاشة من اللعبة -->
-            <div class="section-title">لقطات حية من الجيم بلاي:</div>
-            <div class="gallery">
-                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=400&q=80" alt="Battlefield Ground">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80" alt="Winter Assault">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80" alt="Weapon View">
+            <div class="spec-card">
+                <i class="fa-solid fa-hard-drive spec-icon"></i>
+                <span class="spec-label">مساحة اللعبة</span>
+                <span class="spec-val">4.0 GB</span>
             </div>
+        </div>
 
-            <!-- زر التحميل المباشر -->
+        <!-- Download Action Card -->
+        <div class="download-card">
+            <h3 style="font-size: 20px; font-weight: 900; margin-bottom: 10px;">جاهز لقتال الفصائل؟</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">احصل على النسخة الأصلية المباشرة (APK) واستمتع بأقوى تجربة حرب عالمية.</p>
+            
+            <!-- ضع رابط Google Drive مكان الـ # -->
             <a href="#" class="download-btn">
-                <span>🔥 تحميل اللعبة (APK)</span>
+                <i class="fa-solid fa-download"></i>
+                <span>تحميل اللعبة الآن (APK)</span>
             </a>
+        </div>
 
-            <div class="footer">
-                الإصدار الرسمي © 2026 | Enlisted Mobile Project
+        <!-- Game Screenshots -->
+        <div class="section-header">
+            <i class="fa-solid fa-crosshair"></i>
+            <span>لقطات حية من الجيم بلاي (الجبهة السوفيتية):</span>
+        </div>
+
+        <div class="gallery-scroller">
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Gameplay 1">
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Gameplay 2">
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Gameplay 3">
             </div>
         </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        ENLISTED MOBILE PROJECT © 2026 | جميع الحقوق محفوظة
     </div>
 
 </body>
