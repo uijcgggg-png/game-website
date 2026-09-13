@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff6b00;
-            --secondary: #00e5ff;
-            --bg: #080b10;
-            --card-bg: rgba(15, 23, 42, 0.85);
+            --primary: #ff4500;
+            --accent: #eab308;
+            --bg: #05070a;
+            --card-bg: rgba(12, 17, 29, 0.9);
             --text: #f8fafc;
         }
 
@@ -28,121 +28,115 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px 10px;
-            background-image: 
-                radial-gradient(circle at 50% -20%, rgba(255, 107, 0, 0.25), transparent 70%),
-                radial-gradient(circle at 50% 120%, rgba(0, 229, 255, 0.15), transparent 70%);
+            padding: 15px;
+            background: radial-gradient(circle at 50% 10%, rgba(255, 69, 0, 0.2), transparent 60%),
+                        radial-gradient(circle at 50% 90%, rgba(15, 23, 42, 0.9), #05070a);
             background-attachment: fixed;
         }
 
         .main-card {
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 69, 0, 0.3);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 107, 0, 0.1);
+            box-shadow: 0 0 40px rgba(255, 69, 0, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.9);
         }
 
-        .banner-container {
+        .hero-header {
             position: relative;
-            height: 220px;
+            height: 230px;
             overflow: hidden;
         }
 
-        .banner-img {
+        .hero-header img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.9);
         }
 
-        .banner-overlay {
+        .hero-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            background: linear-gradient(0deg, #0f172a 0%, rgba(15, 23, 42, 0.4) 50%, transparent 100%);
+            inset: 0;
+            background: linear-gradient(0deg, rgba(12, 17, 29, 1) 0%, rgba(12, 17, 29, 0.3) 60%, transparent 100%);
         }
 
-        .tag {
+        .badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.75);
             border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 900;
+            text-shadow: 0 0 5px var(--primary);
         }
 
         .content {
-            padding: 24px;
+            padding: 20px 24px;
         }
 
         .game-title {
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 900;
             text-align: center;
-            letter-spacing: 0.5px;
-            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+            margin-bottom: 6px;
+            letter-spacing: 1px;
         }
 
         .game-desc {
             color: #94a3b8;
-            font-size: 13.5px;
+            font-size: 13px;
             text-align: center;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
-        .stats-grid {
+        .specs-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 20px;
         }
 
-        .stat-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 10px;
-            border-radius: 12px;
+        .spec-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 5px;
+            border-radius: 14px;
             text-align: center;
         }
 
-        .stat-title {
-            font-size: 11px;
+        .spec-label {
+            font-size: 10.5px;
             color: #64748b;
             display: block;
         }
 
-        .stat-value {
+        .spec-value {
             font-size: 13px;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--accent);
         }
 
-        .gallery-title {
-            font-size: 14px;
+        .section-title {
+            font-size: 13px;
             font-weight: 700;
+            color: #e2e8f0;
             margin-bottom: 10px;
-            color: #cbd5e1;
         }
 
         .gallery {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             overflow-x: auto;
             padding-bottom: 10px;
             margin-bottom: 20px;
@@ -153,17 +147,33 @@
         }
 
         .gallery::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--primary);
             border-radius: 4px;
         }
 
         .gallery img {
-            width: 120px;
-            height: 70px;
+            width: 140px;
+            height: 80px;
             object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
+        }
+
+        .audio-player {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .audio-info {
+            font-size: 12px;
+            color: #cbd5e1;
         }
 
         .download-btn {
@@ -173,21 +183,21 @@
             gap: 10px;
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #ff4500 0%, #ff6b00 100%);
             color: #ffffff;
             text-decoration: none;
-            font-size: 17px;
-            font-weight: 700;
-            border-radius: 14px;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
-            transition: all 0.3s ease;
+            font-size: 18px;
+            font-weight: 900;
+            border-radius: 16px;
+            box-shadow: 0 6px 25px rgba(255, 69, 0, 0.5);
+            transition: all 0.2s ease;
         }
 
         .download-btn:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
         }
 
-        .footer-note {
+        .footer {
             text-align: center;
             font-size: 11px;
             color: #475569;
@@ -198,45 +208,56 @@
 <body>
 
     <div class="main-card">
-        <div class="banner-container">
-            <span class="tag">إصدار الهواتف 2026</span>
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" class="banner-img" alt="Enlisted Banner">
-            <div class="banner-overlay"></div>
+        <div class="hero-header">
+            <span class="badge">الأندرويد 10+</span>
+            <!-- صورة الغلاف السوفيتية -->
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Enlisted Banner">
+            <div class="hero-overlay"></div>
         </div>
 
         <div class="content">
             <h1 class="game-title">ENLISTED MOBILE</h1>
-            <p class="game-desc">خوض تجربة الحروب الواقعية وحروب الفصائل في ساحات قتال ضخمة على هاتفك المحمول بكفاءة عالية.</p>
+            <p class="game-desc">خوض معارك الحرب العالمية الثانية برسمات واقعية خارقة وحروب فصائل ضخمة على هاتفك المحمول.</p>
 
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <span class="stat-title">الحجم</span>
-                    <span class="stat-value">2.4 GB</span>
+            <!-- المواصفات المطلوبة -->
+            <div class="specs-grid">
+                <div class="spec-box">
+                    <span class="spec-label">المساحة</span>
+                    <span class="spec-value">4 GB</span>
                 </div>
-                <div class="stat-box">
-                    <span class="stat-title">الأندرويد</span>
-                    <span class="stat-value">8.0+</span>
+                <div class="spec-box">
+                    <span class="spec-label">الرام المطلوب</span>
+                    <span class="spec-value">6 GB</span>
                 </div>
-                <div class="stat-box">
-                    <span class="stat-title">الرام</span>
-                    <span class="stat-value">4 GB+</span>
+                <div class="spec-box">
+                    <span class="spec-label">النظام</span>
+                    <span class="spec-value">Android 10+</span>
                 </div>
             </div>
 
-            <div class="gallery-title">لقطات من اللعبة:</div>
+            <!-- الموسيقى الحماسية -->
+            <div class="audio-player">
+                <span class="audio-info">🎵 موسيقى المعركة (Epic Theme)</span>
+                <audio controls style="height: 30px; width: 160px;">
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <!-- لقطات الشاشة من اللعبة -->
+            <div class="section-title">لقطات حية من الجيم بلاي:</div>
             <div class="gallery">
-                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=300&q=80" alt="Screen 1">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=300&q=80" alt="Screen 2">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=300&q=80" alt="Screen 3">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=400&q=80" alt="Battlefield Ground">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80" alt="Winter Assault">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80" alt="Weapon View">
             </div>
 
-            <!-- استبدل علامة # برابط التحميل من جوجل درايف -->
+            <!-- زر التحميل المباشر -->
             <a href="#" class="download-btn">
-                <span>⚡ تحميل اللعبة الآن (APK)</span>
+                <span>🔥 تحميل اللعبة (APK)</span>
             </a>
 
-            <div class="footer-note">
-                جميع الحقوق محفوظة © 2026 | النسخة المباشرة
+            <div class="footer">
+                الإصدار الرسمي © 2026 | Enlisted Mobile Project
             </div>
         </div>
     </div>
