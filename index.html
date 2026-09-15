@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NEXUS-CHECK AI | المنصة الاحترافية لقياس أداء الألعاب</title>
+    <title>CRAFT-HUB | تحفيز وتنزيل اصدارات ماين كرافت كراك</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #050b07;
-            --card-bg: rgba(12, 24, 16, 0.85);
+            --bg-dark: #040d07;
+            --card-bg: rgba(10, 25, 15, 0.85);
             --primary-green: #10b981;
             --neon-green: #00ff66;
-            --dark-green: #064e3b;
-            --border-color: rgba(0, 255, 102, 0.2);
+            --border-color: rgba(0, 255, 102, 0.25);
             --text-main: #ffffff;
             --text-sub: #9ca3af;
         }
@@ -23,6 +22,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -32,18 +32,18 @@
             min-height: 100vh;
             background-image: 
                 radial-gradient(circle at 50% 0%, rgba(0, 255, 102, 0.15), transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.1), transparent 40%);
+                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08), transparent 40%);
             background-attachment: fixed;
-            padding-bottom: 40px;
+            padding-bottom: 50px;
         }
 
-        /* Top Navigation Bar */
+        /* Top Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 5%;
-            background: rgba(5, 11, 7, 0.95);
+            padding: 15px 5%;
+            background: rgba(4, 13, 7, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -52,600 +52,40 @@
         }
 
         .brand {
-            font-size: clamp(18px, 4vw, 24px);
+            font-size: clamp(20px, 4vw, 26px);
             font-weight: 900;
             color: #fff;
             display: flex;
             align-items: center;
-            gap: 8px;
-            letter-spacing: 1px;
+            gap: 10px;
         }
 
         .brand span {
             color: var(--neon-green);
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
         }
 
-        .nav-btns {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-mini {
-            background: rgba(0, 255, 102, 0.08);
-            border: 1px solid var(--border-color);
+        .badge {
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--neon-green);
             color: var(--neon-green);
-            padding: 6px 12px;
+            padding: 4px 10px;
             border-radius: 20px;
             font-size: 11px;
             font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
         }
 
-        .btn-mini:hover {
-            background: var(--neon-green);
-            color: #000;
-            box-shadow: 0 0 12px var(--neon-green);
-        }
-
-        /* Tabs Header */
-        .tab-menu {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px 10px;
-            background: rgba(12, 24, 16, 0.5);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-sub);
-            padding: 8px 16px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            border-radius: 12px;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background: var(--primary-green);
-            color: #000;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
-        }
-
-        /* Section Container */
-        .content-section {
-            display: none;
-            max-width: 1000px;
+        /* Hero Container */
+        .container {
+            max-width: 1100px;
             margin: 20px auto;
             padding: 0 15px;
         }
 
-        .content-section.active {
-            display: block;
-        }
-
-        /* Hero Banner */
         .hero {
             text-align: center;
-            padding: 30px 10px 20px;
+            padding: 40px 15px 20px;
         }
 
         .hero h1 {
-            font-size: clamp(24px, 5vw, 40px);
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 8px;
-        }
-
-        .hero h1 span {
-            color: var(--neon-green);
-        }
-
-        /* Form Card */
-        .main-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 22px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-group label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--neon-green);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        input, select {
-            background: #08120c;
-            border: 1px solid var(--border-color);
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            outline: none;
-            transition: 0.3s;
-            width: 100%;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
-        }
-
-        .btn-action {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--primary-green), var(--neon-green));
-            border: none;
-            color: #000;
-            font-size: 16px;
-            font-weight: 900;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(0, 255, 102, 0.3);
-        }
-
-        .btn-action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 255, 102, 0.5);
-        }
-
-        /* Result Card */
-        .result-box {
-            display: none;
-            margin-top: 25px;
-            background: #08120c;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .gauge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .gauge-card {
-            background: rgba(12, 24, 16, 0.9);
-            border: 1px solid var(--border-color);
-            padding: 12px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .gauge-val {
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--neon-green);
-            margin-top: 4px;
-        }
-
-        /* FPS Table */
-        .fps-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: rgba(5, 11, 7, 0.8);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .fps-table th, .fps-table td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 12px;
-        }
-
-        .fps-table th {
-            background: var(--dark-green);
-            color: var(--neon-green);
-        }
-
-        /* Real Game Library Cards */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .game-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--neon-green);
-        }
-
-        .game-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
-
-        .game-card-title {
-            padding: 8px;
-            text-align: center;
-            font-size: 11px;
-            font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Modal Screens */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-
-        .modal-box {
-            background: #08120c;
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            width: 100%;
-            max-width: 450px;
-            padding: 20px;
-            position: relative;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            cursor: pointer;
-            color: var(--text-sub);
-        }
-
-        .ticket-item {
-            background: rgba(0, 255, 102, 0.05);
-            border: 1px solid var(--border-color);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 12px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Header Navbar -->
-    <nav class="navbar">
-        <button class="btn-mini" onclick="openOwnerLogin()">
-            <i class="fa-solid fa-user-shield"></i> استلام الشكاوى
-        </button>
-
-        <div class="brand">
-            <i class="fa-solid fa-microchip"></i> NEXUS-CHECK <span>AI</span>
-        </div>
-
-        <button class="btn-mini" onclick="openModal('complaintModal')">
-            <i class="fa-solid fa-paper-plane"></i> تقديم شكوى
-        </button>
-    </nav>
-
-    <!-- Navigation Tabs -->
-    <div class="tab-menu">
-        <button class="tab-btn active" onclick="switchTab('homeTab', this)"><i class="fa-solid fa-house"></i> الرئيسية</button>
-        <button class="tab-btn" onclick="switchTab('checkTab', this)"><i class="fa-solid fa-gauge-high"></i> فحص الجهاز</button>
-        <button class="tab-btn" onclick="switchTab('reviewsTab', this)"><i class="fa-solid fa-star"></i> تقييم الألعاب</button>
-    </div>
-
-    <!-- TAB 1: HOME PAGE -->
-    <div id="homeTab" class="content-section active">
-        <div class="hero">
-            <h1>أهلاً بك في منصة <span>NEXUS-CHECK AI</span></h1>
-            <p>المنصة الدقيقة لفحص توافق مكونات الكمبيوتر والهاتف مع جميع ألعاب العالم.</p>
-        </div>
-
-        <h3 style="margin: 20px 0 10px; color: var(--neon-green);"><i class="fa-solid fa-fire"></i> أبرز الألعاب المدعومة حالياً</h3>
-        <div class="games-grid">
-            <div class="game-card" onclick="selectAndGo('Once Human')">
-                <img src="https://m.media-amazon.com/images/M/MV5BNTIwM2MwYWMtOWM1Ni00NTgwLWI2MzgtODhkYjU4OGIzMDFhXkEyXkFqcGc@._V1_.jpg" alt="Once Human">
-                <div class="game-card-title">Once Human</div>
-            </div>
-            <div class="game-card" onclick="selectAndGo('GTA V')">
-                <img src="https://upload.wikimedia.org/wikipedia/ar/a/a5/Grand_Theft_Auto_V.iframe.jpg" alt="GTA V">
-                <div class="game-card-title">GTA V</div>
-            </div>
-            <div class="game-card" onclick="selectAndGo('Enlisted')">
-                <img src="https://upload.wikimedia.org/wikipedia/en/2/29/Enlisted_cover.png" alt="Enlisted">
-                <div class="game-card-title">Enlisted</div>
-            </div>
-            <div class="game-card" onclick="selectAndGo('Cyberpunk 2077')">
-                <img src="https://upload.wikimedia.org/wikipedia/ar/e/e6/Cyberpunk_2077_box_art.jpg" alt="Cyberpunk 2077">
-                <div class="game-card-title">Cyberpunk 2077</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- TAB 2: PERFORMANCE CHECK -->
-    <div id="checkTab" class="content-section">
-        <div class="main-card">
-            <h2 style="margin-bottom: 15px; font-size: 18px; color: #fff;"><i class="fa-solid fa-sliders"></i> أدخل إمكانيات جهازك يدوياً</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label><i class="fa-solid fa-microchip"></i> اكتب اسم المعالج (CPU)</label>
-                    <input type="text" id="cpuInput" placeholder="مثال: Ryzen 5 4600G أو Core i5-12400F">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fa-solid fa-hard-drive"></i> كارت الشاشة الخارجي (Dedicated GPU)</label>
-                    <input type="text" id="gpuInput" placeholder="مثال: GTX 1660 Super أو RTX 4060">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fa-solid fa-display"></i> كارت الشاشة الداخلي (Integrated GPU)</label>
-                    <input type="text" id="igpuInput" placeholder="مثال: Radeon Vega 7 أو Intel UHD 770">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fa-solid fa-memory"></i> حجم الرام (GB RAM)</label>
-                    <input type="number" id="ramInput" placeholder="مثال: 16">
-                </div>
-
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <label><i class="fa-solid fa-gamepad"></i> اكتب اسم اللعبة المراد فحصها</label>
-                    <input type="text" id="gameSearchInput" placeholder="اكتب أي لعبة (مثل: Silent Breath, PUBG, Valorant)...">
-                </div>
-            </div>
-
-            <button class="btn-action" onclick="runCalculation()"><i class="fa-solid fa-bolt"></i> إجراء فحص حقيقي ودقيق الآن</button>
-
-            <!-- Results -->
-            <div class="result-box" id="resultBox">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <h3 id="resGameTitle" style="color:var(--neon-green); font-size: 20px;">-</h3>
-                        <p id="resStatus" style="font-size: 12px; color: var(--text-sub);">النتيجة بناءً على حسابات المتطلبات الرسمية</p>
-                    </div>
-                    <div style="font-size: 28px; font-weight: 900; color: var(--neon-green);" id="resScore">--%</div>
-                </div>
-
-                <div class="gauge-grid">
-                    <div class="gauge-card">
-                        <div style="font-size: 11px; color: var(--text-sub);">استهلاك قوة كارت الشاشة</div>
-                        <div class="gauge-val" id="gpuLoad">0%</div>
-                    </div>
-                    <div class="gauge-card">
-                        <div style="font-size: 11px; color: var(--text-sub);">استهلاك قوة المعالج</div>
-                        <div class="gauge-val" id="cpuLoad">0%</div>
-                    </div>
-                    <div class="gauge-card">
-                        <div style="font-size: 11px; color: var(--text-sub);">استهلاك الرامات</div>
-                        <div class="gauge-val" id="ramUsage">0 GB</div>
-                    </div>
-                </div>
-
-                <h4 style="font-size: 13px; color: var(--neon-green); margin-top: 15px;">جدول الإطارات المتوقعة (FPS Matrix)</h4>
-                <table class="fps-table">
-                    <thead>
-                        <tr>
-                            <th>الدقة</th>
-                            <th>Low</th>
-                            <th>Medium</th>
-                            <th>High</th>
-                            <th>Ultra</th>
-                        </tr>
-                    </thead>
-                    <tbody id="fpsRows">
-                        <!-- Populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- TAB 3: GAME REVIEWS -->
-    <div id="reviewsTab" class="content-section">
-        <div class="main-card">
-            <h2><i class="fa-solid fa-star"></i> قسم تقييم ومراجعات الألعاب</h2>
-            <p style="color:var(--text-sub); font-size:13px; margin-bottom: 20px;">تقييمات مجتمعية وأداء الألعاب الواقعي:</p>
-
-            <div style="display:grid; gap:15px;">
-                <div style="background:#08120c; padding:15px; border-radius:12px; border:1px solid var(--border-color);">
-                    <h4 style="color:var(--neon-green);">Once Human ⭐ 8.8/10</h4>
-                    <p style="font-size:12px; color:#ccc; margin-top:5px;">لعبة بقاء ممتازة بعالم مفتوح ضخم، تتطلب معالج سداسي النواة وكارت شاشة لا يقل عن GTX 1060 للحصول على 60 فريم سلسة.</p>
-                </div>
-                <div style="background:#08120c; padding:15px; border-radius:12px; border:1px solid var(--border-color);">
-                    <h4 style="color:var(--neon-green);">GTA V ⭐ 9.5/10</h4>
-                    <p style="font-size:12px; color:#ccc; margin-top:5px;">محسنة وممتازة جداً، تعمل على الكروت المدمجة مثل Vega 7 بفريمات تتجاوز 50 FPS على دقة 720p/1080p Low.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Complaint Modal (User) -->
-    <div class="modal-overlay" id="complaintModal">
-        <div class="modal-box">
-            <i class="fa-solid fa-xmark close-btn" onclick="closeModal('complaintModal')"></i>
-            <h3 style="margin-bottom: 10px; color: var(--neon-green);"><i class="fa-solid fa-paper-plane"></i> تقديم شكوى أو ملحوظة</h3>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <label>الاسم</label>
-                <input type="text" id="ticketName" placeholder="اسمك...">
-            </div>
-            <div class="form-group" style="margin-bottom: 15px;">
-                <label>التفاصيل</label>
-                <input type="text" id="ticketText" placeholder="اكتب شكواك هنا...">
-            </div>
-            <button class="btn-action" style="padding: 10px;" onclick="sendTicket()">إرسال التذكرة</button>
-        </div>
-    </div>
-
-    <!-- Owner Modal (Admin) -->
-    <div class="modal-overlay" id="ownerModal">
-        <div class="modal-box">
-            <i class="fa-solid fa-xmark close-btn" onclick="closeModal('ownerModal')"></i>
-            <h3 style="margin-bottom: 10px; color: var(--neon-green);"><i class="fa-solid fa-inbox"></i> صندوق التذاكر (الأونر)</h3>
-            <div id="ticketsList" style="max-height: 250px; overflow-y: auto;">
-                <!-- Tickets render -->
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Tab Switcher
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function selectAndGo(gameName) {
-            document.getElementById('gameSearchInput').value = gameName;
-            switchTab('checkTab', document.querySelectorAll('.tab-btn')[1]);
-        }
-
-        // Accurate Benchmarking System
-        function runCalculation() {
-            const cpu = document.getElementById('cpuInput').value.toLowerCase();
-            const gpu = document.getElementById('gpuInput').value.toLowerCase();
-            const igpu = document.getElementById('igpuInput').value.toLowerCase();
-            const ram = parseInt(document.getElementById('ramInput').value) || 8;
-            const game = document.getElementById('gameSearchInput').value || "اللعبة المحددة";
-
-            let powerScore = 30; // Base score
-
-            // GPU Score Evaluation
-            if (gpu.includes('4090') || gpu.includes('4080')) powerScore += 90;
-            else if (gpu.includes('4070') || gpu.includes('3080')) powerScore += 75;
-            else if (gpu.includes('4060') || gpu.includes('3060') || gpu.includes('6600')) powerScore += 60;
-            else if (gpu.includes('1660') || gpu.includes('1060') || gpu.includes('580')) powerScore += 45;
-            else if (gpu.includes('1650') || gpu.includes('1050')) powerScore += 30;
-            else if (igpu.includes('vega 7') || igpu.includes('vega 11') || igpu.includes('770')) powerScore += 25;
-
-            // CPU Score Evaluation
-            if (cpu.includes('i9') || cpu.includes('ryzen 9') || cpu.includes('7800x3d')) powerScore += 30;
-            else if (cpu.includes('i7') || cpu.includes('ryzen 7')) powerScore += 22;
-            else if (cpu.includes('i5') || cpu.includes('ryzen 5') || cpu.includes('4600g')) powerScore += 15;
-
-            // RAM Evaluation
-            if (ram >= 16) powerScore += 10;
-            else if (ram < 8) powerScore -= 15;
-
-            // Calculate Realistic FPS Base
-            let baseFps = Math.max(18, Math.round(powerScore * 0.9));
-
-            // Render Output
-            document.getElementById('resGameTitle').textContent = game;
-            document.getElementById('resScore').textContent = Math.min(99, Math.round(powerScore)) + "%";
-
-            document.getElementById('gpuLoad').textContent = Math.min(99, Math.max(45, 105 - Math.round(powerScore * 0.4))) + "%";
-            document.getElementById('cpuLoad').textContent = Math.min(95, Math.max(25, 90 - Math.round(powerScore * 0.3))) + "%";
-            document.getElementById('ramUsage').textContent = Math.min(ram, (ram > 8 ? 11 : 6.5)) + " GB";
-
-            const tbody = document.getElementById('fpsRows');
-            tbody.innerHTML = `
-                <tr>
-                    <td><strong>1080p</strong></td>
-                    <td>${baseFps + 25} FPS</td>
-                    <td>${baseFps + 12} FPS</td>
-                    <td>${baseFps} FPS</td>
-                    <td>${Math.max(15, baseFps - 10)} FPS</td>
-                </tr>
-                <tr>
-                    <td><strong>1440p</strong></td>
-                    <td>${Math.round(baseFps * 0.75)} FPS</td>
-                    <td>${Math.round(baseFps * 0.6)} FPS</td>
-                    <td>${Math.round(baseFps * 0.5)} FPS</td>
-                    <td>${Math.max(10, Math.round(baseFps * 0.4))} FPS</td>
-                </tr>
-            `;
-
-            document.getElementById('resultBox').style.display = 'block';
-        }
-
-        // Modals Controls & Protected Tickets
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        let tickets = JSON.parse(localStorage.getItem('nexus_green_tickets')) || [];
-
-        function sendTicket() {
-            const name = document.getElementById('ticketName').value || "زائر";
-            const text = document.getElementById('ticketText').value;
-
-            if(!text) { alert("اكتب الشكوى أولاً!"); return; }
-
-            tickets.push({ name: name, text: text, date: new Date().toLocaleDateString('ar-EG') });
-            localStorage.setItem('nexus_green_tickets', JSON.stringify(tickets));
-
-            alert("تم إرسال شكواك بنجاح للأونر!");
-            closeModal('complaintModal');
-            document.getElementById('ticketText').value = "";
-        }
-
-        function openOwnerLogin() {
-            const pwd = prompt("أهلاً يا أونر! أدخل الباسورد الخاص بك للوصول للشكاوى:");
-            if(pwd === "Ahmedfox22") {
-                renderTickets();
-                openModal('ownerModal');
-            } else if(pwd !== null) {
-                alert("الباسورد غير صحيح!");
-            }
-        }
-
-        function renderTickets() {
-            const container = document.getElementById('ticketsList');
-            container.innerHTML = "";
-            if(tickets.length === 0) {
-                container.innerHTML = "<p style='color:var(--text-sub); text-align:center;'>لا توجد شكاوى حالياً.</p>";
-                return;
-            }
-            tickets.forEach(t => {
-                container.innerHTML += `
-                    <div class="ticket-item">
-                        <div style="color:var(--neon-green); font-weight:700;">👤 ${t.name} <span style="color:var(--text-sub); float:left;">${t.date}</span></div>
-                        <div style="margin-top:4px; color:#fff;">${t.text}</div>
-                    </div>
-                `;
-            });
-        }
-    </script>
-</body>
-</html>
+            font-size: clamp(26px,
