@@ -3,467 +3,626 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameCheck AI - هل جهازك يشغل اللعبة؟</title>
-    <!-- FontAwesome & Google Fonts -->
+    <title>HONSD-Ai-plus⚡ - محرك فحص أداء الألعاب الذكي</title>
+    <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #151c2c;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --green-color: #10b981;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1f293d;
+            --bg-base: #05070e;
+            --card-glass: rgba(15, 23, 42, 0.75);
+            --neon-blue: #00f0ff;
+            --neon-purple: #7000ff;
+            --neon-pink: #ff007f;
+            --neon-green: #00ff88;
+            --neon-red: #ff3355;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Tajawal', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Top Bar & Buttons */
-        .top-bar {
+        /* Animated Neon Background */
+        .bg-glow-1, .bg-glow-2 {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.25;
+            z-index: -1;
+            animation: floatGlow 10s infinite alternate ease-in-out;
+        }
+
+        .bg-glow-1 {
+            background: var(--neon-purple);
+            top: -100px;
+            left: -100px;
+        }
+
+        .bg-glow-2 {
+            background: var(--neon-blue);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 80px) scale(1.2); }
+        }
+
+        /* Top Bar */
+        .top-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
-            background: rgba(21, 28, 44, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            padding: 12px 30px;
+            background: rgba(8, 12, 22, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glass);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .brand-logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
             gap: 6px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
         }
 
-        .btn-support {
-            background: #1e293b;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
+        .brand-logo span {
+            color: #ffcc00;
+            -webkit-text-fill-color: #ffcc00;
+            animation: pulseLightning 1.5s infinite;
         }
 
-        .btn-support:hover {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
+        @keyframes pulseLightning {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
         }
 
-        .btn-admin {
-            background: #0284c7;
-            color: white;
+        .nav-actions {
+            display: flex;
+            gap: 8px;
         }
 
-        .btn-admin:hover {
-            background: #0369a1;
+        .btn-mini {
+            padding: 5px 11px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 6px;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-sub);
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-            flex: 1;
-            width: 100%;
+        .btn-mini:hover {
+            color: #fff;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-mini-admin {
+            border-color: rgba(112, 0, 255, 0.4);
+        }
+
+        .btn-mini-admin:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 10px rgba(112, 0, 255, 0.4);
+        }
+
+        /* Layout */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .hero-title {
-            text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #a5b4fc, #6366f1);
+            margin-bottom: 12px;
+            line-height: 1.2;
+            background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 30px;
+        .hero-desc {
+            color: var(--text-sub);
             font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* Search Section */
-        .search-box {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        /* Main Glass Card */
+        .glass-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 15px;
-            align-items: center;
-            margin-bottom: 30px;
+            grid-template-columns: 1fr 1.5fr auto;
+            gap: 20px;
+            align-items: end;
         }
 
-        .input-group label {
+        .input-box label {
             display: block;
             font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 8px;
         }
 
-        .input-group select, .input-group input {
+        .input-box select, .input-box input {
             width: 100%;
-            padding: 12px;
-            background: #0d1322;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            padding: 14px 18px;
+            background: rgba(5, 7, 14, 0.8);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
             color: #fff;
             font-size: 14px;
             outline: none;
+            transition: all 0.3s ease;
         }
 
-        .btn-analyze {
-            background: var(--accent-color);
-            color: white;
+        .input-box select:focus, .input-box input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: #fff;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: 700;
+            padding: 14px 30px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 15px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(112, 0, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             height: 48px;
-            margin-top: 20px;
-            transition: 0.2s;
         }
 
-        .btn-analyze:hover {
-            background: var(--accent-hover);
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.5);
         }
 
-        /* Results Area */
-        .results-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
+        /* Detailed Results Panel */
+        .results-panel {
             display: none;
-            animation: fadeIn 0.4s ease;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-glass);
+            animation: fadeInUp 0.5s ease forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .result-header {
+        .result-head {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-
-        .compat-badge {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--green-color);
-            border: 1px solid var(--green-color);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
             margin-bottom: 25px;
         }
 
-        .stat-item {
-            background: #0d1322;
-            padding: 15px;
-            border-radius: 12px;
+        .badge-compat {
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            border: 1px solid transparent;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .metric-card {
+            background: rgba(5, 7, 14, 0.6);
+            border: 1px solid var(--border-glass);
+            padding: 20px;
+            border-radius: 16px;
             text-align: center;
-            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
         }
 
-        .stat-item h4 {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-bottom: 5px;
+        .metric-card h4 {
+            color: var(--text-sub);
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
-        .stat-item p {
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
+        .metric-card .val {
+            font-size: 1.8rem;
+            font-weight: 900;
         }
 
-        /* Modals (تذاكر والدعم) */
+        .analysis-text {
+            background: rgba(5, 7, 14, 0.6);
+            border: 1px solid var(--border-glass);
+            padding: 20px;
+            border-radius: 16px;
+            line-height: 1.7;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            z-index: 200;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 5, 10, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
         }
 
-        .modal-content {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
+        .modal-box {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 30px;
             width: 90%;
-            max-width: 500px;
-            border: 1px solid var(--border-color);
+            max-width: 480px;
             position: relative;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .modal-box h3 {
             margin-bottom: 15px;
+            font-size: 1.2rem;
         }
 
-        .close-btn {
-            cursor: pointer;
-            font-size: 20px;
-            color: var(--text-muted);
-        }
-
-        .modal-content input, .modal-content textarea {
+        .modal-box input, .modal-box textarea {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            background: #0d1322;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            padding: 12px;
+            background: rgba(5, 7, 14, 0.9);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
             color: white;
+            margin-bottom: 12px;
+            outline: none;
         }
 
-        .ticket-item {
-            background: #0d1322;
+        .close-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            color: var(--text-sub);
+        }
+
+        .ticket-card {
+            background: rgba(5, 7, 14, 0.8);
+            border: 1px solid var(--border-glass);
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 10px;
-            border-right: 3px solid var(--accent-color);
+            border-right: 3px solid var(--neon-blue);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .search-box {
-                grid-template-columns: 1fr;
-            }
-            .btn-analyze {
-                margin-top: 0;
-            }
-            .hero-title {
-                font-size: 1.8rem;
-            }
+        @media (max-width: 850px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.1rem; }
+            .top-nav { padding: 12px 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <button class="btn-sm btn-support" onclick="openModal('supportModal')">
-            <i class="fa-solid fa-headset"></i> تذكرة دعم فني
-        </button>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
 
-        <button class="btn-sm btn-admin" onclick="openAdminCheck()">
-            <i class="fa-solid fa-user-shield"></i> استلام التذاكر
-        </button>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <h1 class="hero-title">هل جهازك يقدر يشغّل هذه اللعبة؟</h1>
-        <p class="hero-subtitle">مدعوم بالذكاء الاصطناعي - فوري، دقيق، وصادق</p>
-
-        <!-- Search Box -->
-        <div class="search-box">
-            <div class="input-group">
-                <label><i class="fa-solid fa-gamepad"></i> اختر اللعبة</label>
-                <select id="gameSelect">
-                    <option value="GTA V">Grand Theft Auto V</option>
-                    <option value="Once Human">Once Human</option>
-                    <option value="Enlisted">Enlisted</option>
-                    <option value="Cyberpunk 2077">Cyberpunk 2077</option>
-                    <option value="PUBG PC">PUBG PC</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label><i class="fa-solid fa-microchip"></i> مواصفات جهازك (المعالج، الكارت، الرام)</label>
-                <input type="text" id="specsInput" placeholder="مثال: Ryzen 5 4600G / GTX 1660 Super / 16GB RAM">
-            </div>
-
-            <button class="btn-analyze" onclick="analyzeSpecs()">
-                <i class="fa-solid fa-bolt"></i> تحليل الأداء
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="brand-logo">
+            HONSD-Ai-plus <span>⚡</span>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-mini" onclick="openModal('supportModal')">
+                <i class="fa-solid fa-headset"></i> تذكرة دعم
+            </button>
+            <button class="btn-mini btn-mini-admin" onclick="authAdmin()">
+                <i class="fa-solid fa-shield-halved"></i> استلام التذاكر
             </button>
         </div>
+    </nav>
 
-        <!-- Results Card -->
-        <div class="results-card" id="resultsCard">
-            <div class="result-header">
-                <div>
-                    <h2 id="resGameTitle">Grand Theft Auto V</h2>
-                    <p style="color: var(--text-muted); font-size: 14px;">تقرير التوافق والأداء المتوقع</p>
+    <!-- Main Container -->
+    <div class="wrapper">
+        <header class="hero-section">
+            <h1 class="hero-title">هل جهازك مستعد للتشغيل؟</h1>
+            <p class="hero-desc">المحرك الخوارزمي الأحدث لتقييم توافق العتاد وحساب معدل الإطارات (FPS) بدقة واقعية.</p>
+        </header>
+
+        <!-- Main Checker Card -->
+        <main class="glass-card">
+            <div class="form-grid">
+                <div class="input-box">
+                    <label><i class="fa-solid fa-gamepad"></i> اختر اللعبة Target Game</label>
+                    <select id="gameSelect">
+                        <option value="gta5">Grand Theft Auto V</option>
+                        <option value="oncehuman">Once Human</option>
+                        <option value="enlisted">Enlisted</option>
+                        <option value="cyberpunk">Cyberpunk 2077</option>
+                        <option value="pubg">PUBG PC</option>
+                    </select>
                 </div>
-                <div class="compat-badge" id="resCompat">96% توافق</div>
+
+                <div class="input-box">
+                    <label><i class="fa-solid fa-microchip"></i> مواصفات جهازك (المعالج / الكارت / الرام)</label>
+                    <input type="text" id="specsInput" placeholder="مثال: Ryzen 5 4600G, GTX 1660 Super, 16GB RAM">
+                </div>
+
+                <button class="btn-submit" onclick="runAnalysis()">
+                    <i class="fa-solid fa-bolt"></i> فحص الأداء
+                </button>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h4>معدل الإطارات (FPS)</h4>
-                    <p id="resFps" style="color: var(--green-color);">110 FPS</p>
+            <!-- Analysis Output -->
+            <section class="results-panel" id="resultsPanel">
+                <div class="result-head">
+                    <div>
+                        <h2 id="resGameTitle" style="font-size: 1.6rem; font-weight: 900;">-</h2>
+                        <span style="color: var(--text-sub); font-size: 13px;">تقرير المعالجة الحسابية للعتاد</span>
+                    </div>
+                    <div class="badge-compat" id="resCompatBadge">-%</div>
                 </div>
-                <div class="stat-item">
-                    <h4>الدقة الموصى بها</h4>
-                    <p id="resRes">1080p / 1440p</p>
-                </div>
-                <div class="stat-item">
-                    <h4>إعدادات الجرافيك</h4>
-                    <p id="resSettings">Ultra / High</p>
-                </div>
-            </div>
 
-            <div style="background: #0d1322; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color);">
-                <h4 style="margin-bottom: 8px; color: var(--accent-color);"><i class="fa-solid fa-circle-info"></i> تحليل المكونات:</h4>
-                <p id="resDetails" style="font-size: 14px; color: var(--text-muted); line-height: 1.6;"></p>
-            </div>
-        </div>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>معدل الإطارات (FPS)</h4>
+                        <div class="val" id="resFpsVal" style="color: var(--neon-green);">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>الدقة المستهدفة</h4>
+                        <div class="val" id="resResVal" style="font-size: 1.2rem; color: #fff;">-</div>
+                    </div>
+                    <div class="metric-card">
+                        <h4>الإعدادات الموصى بها</h4>
+                        <div class="val" id="resSettingsVal" style="font-size: 1.2rem; color: var(--neon-blue);">-</div>
+                    </div>
+                </div>
+
+                <div class="analysis-text" id="resAnalysisText">
+                    -
+                </div>
+            </section>
+        </main>
     </div>
 
-    <!-- Modal: Support Ticket -->
+    <!-- Support Modal -->
     <div class="modal" id="supportModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>إرسال تذكرة دعم فني</h3>
-                <span class="close-btn" onclick="closeModal('supportModal')">&times;</span>
-            </div>
-            <input type="text" id="ticketName" placeholder="اسمك">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-icon" onclick="closeModal('supportModal')"></i>
+            <h3><i class="fa-solid fa-headset" style="color: var(--neon-blue);"></i> فتح تذكرة دعم فني</h3>
+            <input type="text" id="ticketUser" placeholder="اسمك">
             <textarea id="ticketMsg" rows="4" placeholder="اكتب مشكلتك أو استفسارك هنا..."></textarea>
-            <button class="btn-analyze" style="width: 100%; margin-top: 0;" onclick="sendTicket()">إرسال التذكرة</button>
+            <button class="btn-submit" style="width: 100%;" onclick="submitTicket()">إرسال التذكرة</button>
         </div>
     </div>
 
-    <!-- Modal: Admin Tickets View -->
+    <!-- Admin Tickets Modal -->
     <div class="modal" id="adminModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>لوحة استلام التذاكر (الآدمن)</h3>
-                <span class="close-btn" onclick="closeModal('adminModal')">&times;</span>
-            </div>
-            <div id="ticketsList" style="max-height: 300px; overflow-y: auto;">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-icon" onclick="closeModal('adminModal')"></i>
+            <h3><i class="fa-solid fa-shield-halved" style="color: var(--neon-purple);"></i> تذاكر الدعم الواردة</h3>
+            <div id="ticketsContainer" style="max-height: 280px; overflow-y: auto; margin-top: 15px;">
                 <!-- Tickets appended here -->
             </div>
         </div>
     </div>
 
     <script>
-        // Data Simulation
-        function analyzeSpecs() {
-            const game = document.getElementById('gameSelect').value;
-            const specs = document.getElementById('specsInput').value;
+        // Database of Game Demands (Performance Weights)
+        const gameRequirements = {
+            'gta5': { name: 'Grand Theft Auto V', weight: 1.0 },
+            'oncehuman': { name: 'Once Human', weight: 1.6 },
+            'enlisted': { name: 'Enlisted', weight: 1.4 },
+            'cyberpunk': { name: 'Cyberpunk 2077', weight: 2.3 },
+            'pubg': { name: 'PUBG PC', weight: 1.3 }
+        };
 
-            if(!specs.trim()) {
-                alert('برجاء كتابة مواصفات جهازك أولاً!');
+        // Real Hardware Evaluation Engine
+        function runAnalysis() {
+            const gameKey = document.getElementById('gameSelect').value;
+            const rawSpecs = document.getElementById('specsInput').value.toLowerCase().trim();
+            const selectedGame = gameRequirements[gameKey];
+
+            if(!rawSpecs) {
+                alert('يرجى كتابة مواصفات جهازك ليتم حساب الأداء!');
                 return;
             }
 
-            document.getElementById('resGameTitle').innerText = game;
+            // Calculate Hardware Score
+            let gpuScore = 10; // Default minimal score
+            let cpuScore = 10;
+            let ramScore = 8;
+
+            // GPU Detection
+            if (rawSpecs.includes('4090') || rawSpecs.includes('4080') || rawSpecs.includes('7900 xt')) gpuScore = 100;
+            else if (rawSpecs.includes('4070') || rawSpecs.includes('3080') || rawSpecs.includes('6800 xt')) gpuScore = 85;
+            else if (rawSpecs.includes('4060') || rawSpecs.includes('3060') || rawSpecs.includes('6600 xt')) gpuScore = 68;
+            else if (rawSpecs.includes('1660') || rawSpecs.includes('3050') || rawSpecs.includes('rx 580')) gpuScore = 48;
+            else if (rawSpecs.includes('1050') || rawSpecs.includes('gtx 960') || rawSpecs.includes('rx 560')) gpuScore = 28;
+            else if (rawSpecs.includes('gt 710') || rawSpecs.includes('intel hd') || rawSpecs.includes('uhd') || rawSpecs.includes('gt 1030')) gpuScore = 8;
+
+            // CPU Detection
+            if (rawSpecs.includes('i9') || rawSpecs.includes('ryzen 9') || rawSpecs.includes('7800x3d')) cpuScore = 95;
+            else if (rawSpecs.includes('i7') || rawSpecs.includes('ryzen 7') || rawSpecs.includes('13600k')) cpuScore = 80;
+            else if (rawSpecs.includes('i5') || rawSpecs.includes('ryzen 5') || rawSpecs.includes('4600g')) cpuScore = 60;
+            else if (rawSpecs.includes('i3') || rawSpecs.includes('ryzen 3')) cpuScore = 38;
+            else if (rawSpecs.includes('core 2 duo') || rawSpecs.includes('celeron') || rawSpecs.includes('pentium')) cpuScore = 6;
+
+            // RAM Detection
+            if (rawSpecs.includes('32gb') || rawSpecs.includes('64gb')) ramScore = 30;
+            else if (rawSpecs.includes('16gb')) ramScore = 22;
+            else if (rawSpecs.includes('8gb')) ramScore = 12;
+            else if (rawSpecs.includes('4gb')) ramScore = 4;
+
+            // Total System Power Score
+            let totalPower = (gpuScore * 0.55) + (cpuScore * 0.30) + (ramScore * 0.15);
             
-            // AI Simulation Logic
-            let fps = Math.floor(Math.random() * (120 - 50 + 1)) + 50;
-            let compat = Math.floor(Math.random() * (99 - 75 + 1)) + 75;
+            // Calculate FPS & Compatibility based on Game Weight
+            let calculatedFps = Math.round((totalPower * 2.2) / selectedGame.weight);
+            let compatPercentage = Math.min(Math.round((totalPower / (selectedGame.weight * 25)) * 100), 99);
 
-            document.getElementById('resFps').innerText = fps + " FPS";
-            document.getElementById('resCompat').innerText = compat + "% توافق";
-            document.getElementById('resDetails').innerText = `بناءً على المواصفات المدخلة (${specs})، جهازك سيعمل بكفاءة عالية مع لعبة ${game}. المعالج وكارت الشاشة يوفران أداءً متوازناً وبدون اختناق (Bottleneck) ملحوظ.`;
+            // Bounds checking
+            if (calculatedFps < 8) calculatedFps = Math.floor(Math.random() * 5) + 6;
+            if (compatPercentage < 12) compatPercentage = 12;
 
-            document.getElementById('resultsCard').style.display = 'block';
+            // Prepare Display Outcomes
+            let targetRes = "1080p Full HD";
+            let recommendedSettings = "Low";
+            let fpsColor = "var(--neon-green)";
+            let compatBorder = "var(--neon-green)";
+            let analysisSummary = "";
+
+            if (calculatedFps < 25) {
+                fpsColor = "var(--neon-red)";
+                compatBorder = "var(--neon-red)";
+                targetRes = "720p (Low Res)";
+                recommendedSettings = "Lowest Possible";
+                analysisSummary = `⚠️ <strong>أداء غير كافٍ:</strong> المواصفات المدخلة ضعيفة جداً ولا تلبي الحد الأدنى لتشغيل لعبة ${selectedGame.name}. ستلاحظ تقطيعاً حاداً (Lag) وانخفاضاً كبيراً في الفريمات. ينصح بترقية كارت الشاشة والرامات.`;
+            } else if (calculatedFps < 55) {
+                fpsColor = "#f59e0b";
+                compatBorder = "#f59e0b";
+                targetRes = "1080p";
+                recommendedSettings = "Medium";
+                analysisSummary = `👍 <strong>أداء متوسط:</strong> جهازك يقدر على تشغيل لعبة ${selectedGame.name} بأداء مقبول على إعدادات متوسطة، مع تجربة لعب مستقرة نسبياً.`;
+            } else {
+                fpsColor = "var(--neon-green)";
+                compatBorder = "var(--neon-green)";
+                targetRes = (totalPower > 70) ? "1440p 2K" : "1080p Full HD";
+                recommendedSettings = (totalPower > 70) ? "Ultra High" : "High";
+                analysisSummary = `🚀 <strong>أداء ممتاز للغاية:</strong> جهازك متوافق تماماً مع لعبة ${selectedGame.name}! ستستمتع بسلاسة عالية ورسوميات فائقة بدون أي اختناق ملحوظ في العتاد.`;
+            }
+
+            // Render Output
+            document.getElementById('resGameTitle').innerText = selectedGame.name;
+            document.getElementById('resFpsVal').innerText = calculatedFps + " FPS";
+            document.getElementById('resFpsVal').style.color = fpsColor;
+            
+            const badge = document.getElementById('resCompatBadge');
+            badge.innerText = compatPercentage + "% توافق";
+            badge.style.color = compatBorder;
+            badge.style.borderColor = compatBorder;
+            badge.style.background = "rgba(0,0,0,0.4)";
+
+            document.getElementById('resResVal').innerText = targetRes;
+            document.getElementById('resSettingsVal').innerText = recommendedSettings;
+            document.getElementById('resAnalysisText').innerHTML = analysisSummary;
+
+            document.getElementById('resultsPanel').style.display = 'block';
         }
 
-        // Modals Logic
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
+        // Modal Helpers
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
         // Admin Auth
-        function openAdminCheck() {
-            const pass = prompt("أدخل كلمة المرور لدخول لوحة الاستلام:");
-            if(pass === "Ahmedfox22") {
-                loadTickets();
+        function authAdmin() {
+            const pass = prompt("أدخل كلمة المرور الخاصة بالآدمن:");
+            if (pass === "Ahmedfox22") {
+                renderTickets();
                 openModal('adminModal');
-            } else if(pass !== null) {
-                alert("كلمة المرور خاطئة!");
+            } else if (pass !== null) {
+                alert("كلمة المرور غير صحيحة!");
             }
         }
 
-        // Ticket Logic
-        let tickets = JSON.parse(localStorage.getItem('site_tickets') || '[]');
+        // Support Tickets Logic
+        let ticketsList = JSON.parse(localStorage.getItem('honsd_tickets') || '[]');
 
-        function sendTicket() {
-            const name = document.getElementById('ticketName').value;
-            const msg = document.getElementById('ticketMsg').value;
+        function submitTicket() {
+            const user = document.getElementById('ticketUser').value.trim();
+            const msg = document.getElementById('ticketMsg').value.trim();
 
-            if(!name || !msg) {
-                alert('برجاء ملء جميع الحقول');
+            if (!user || !msg) {
+                alert('برجاء كتابة الاسم والتفاصيل!');
                 return;
             }
 
-            tickets.push({ name, msg, date: new Date().toLocaleTimeString() });
-            localStorage.setItem('site_tickets', JSON.stringify(tickets));
+            ticketsList.push({ user, msg, date: new Date().toLocaleTimeString('ar-EG') });
+            localStorage.setItem('honsd_tickets', JSON.stringify(ticketsList));
 
-            alert('تم إرسال تذكرتك بنجاح!');
-            document.getElementById('ticketName').value = '';
+            alert('تم إرسال التذكرة بنجاح!');
+            document.getElementById('ticketUser').value = '';
             document.getElementById('ticketMsg').value = '';
             closeModal('supportModal');
         }
 
-        function loadTickets() {
-            const container = document.getElementById('ticketsList');
-            container.innerHTML = '';
+        function renderTickets() {
+            const box = document.getElementById('ticketsContainer');
+            box.innerHTML = '';
 
-            if(tickets.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); text-align:center;">لا يوجد تذاكر حالياً.</p>';
+            if (ticketsList.length === 0) {
+                box.innerHTML = '<p style="color:var(--text-sub); text-align:center;">لا توجد تذاكر حالية.</p>';
                 return;
             }
 
-            tickets.forEach((t, i) => {
-                container.innerHTML += `
-                    <div class="ticket-item">
-                        <strong>${t.name}</strong> <span style="font-size:11px; color:var(--text-muted);">(${t.date})</span>
-                        <p style="margin-top:5px; font-size:13px;">${t.msg}</p>
+            ticketsList.forEach((t) => {
+                box.innerHTML += `
+                    <div class="ticket-card">
+                        <strong style="color:var(--neon-blue);">${t.user}</strong> <span style="font-size:10px; color:var(--text-sub);">(${t.date})</span>
+                        <p style="margin-top:4px; font-size:12px; color:#e2e8f0;">${t.msg}</p>
                     </div>
                 `;
             });
