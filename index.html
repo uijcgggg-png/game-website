@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToonVault - تون فولت</title>
+    <title>ToonVault - عالم الكرتون</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0f0c1b;
-            --bg-secondary: #1a1528;
-            --accent-purple: #8a2be2;
-            --accent-hover: #9d4edf;
+            --bg-primary: #0a0712;
+            --bg-secondary: #140f24;
+            --bg-card: #1c1533;
+            --accent: #9d4edf;
+            --accent-glow: rgba(157, 78, 223, 0.4);
             --text-main: #ffffff;
-            --text-sub: #b3b3b3;
-            --card-bg: #241b35;
+            --text-muted: #a0a0c0;
+            --border: #2a2048;
         }
 
         [data-theme="light"] {
-            --bg-primary: #f4f0fa;
+            --bg-primary: #f0ebf8;
             --bg-secondary: #ffffff;
-            --accent-purple: #7b2cbf;
-            --accent-hover: #9d4edf;
-            --text-main: #10002b;
-            --text-sub: #5a189a;
-            --card-bg: #e0aaff;
+            --bg-card: #ffffff;
+            --accent: #7b2cbf;
+            --accent-glow: rgba(123, 44, 191, 0.2);
+            --text-main: #1a0c2e;
+            --text-muted: #6b5b82;
+            --border: #e0d5f0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.25s ease;
         }
 
         body {
@@ -41,69 +44,80 @@
             flex-direction: column;
         }
 
+        /* Navbar */
         header {
             background-color: var(--bg-secondary);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--accent-purple);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         .search-container {
             flex-grow: 1;
-            max-width: 500px;
+            max-width: 450px;
             margin: 0 20px;
             position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 10px 15px;
-            border-radius: 20px;
-            border: 2px solid var(--accent-purple);
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--border);
             background-color: var(--bg-primary);
             color: var(--text-main);
             outline: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
         .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 50%;
+            font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-main);
         }
 
+        /* Container */
         main {
             padding: 2rem;
-            flex-grow: 1;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             width: 100%;
+            flex-grow: 1;
         }
 
+        /* Video Player Section */
         .player-section {
             display: none;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             background-color: var(--bg-secondary);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .video-container {
@@ -111,8 +125,9 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 12px;
             background-color: #000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
         }
 
         .video-container iframe {
@@ -124,41 +139,74 @@
             border: 0;
         }
 
+        .movie-details {
+            margin-top: 20px;
+        }
+
         .movie-title {
-            margin-top: 15px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--text-main);
+            margin-bottom: 10px;
         }
 
         .movie-story {
-            margin-top: 10px;
-            color: var(--text-sub);
-            line-height: 1.6;
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 4px solid var(--accent);
         }
 
+        /* Section Header */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Movies Grid */
         .movies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
         }
 
         .movie-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
+            background-color: var(--bg-card);
+            border-radius: 14px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
+            position: relative;
         }
 
         .movie-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px var(--accent-glow);
+        }
+
+        .poster-wrapper {
+            width: 100%;
+            height: 310px;
+            overflow: hidden;
+            position: relative;
         }
 
         .movie-card img {
             width: 100%;
-            height: 280px;
+            height: 100%;
             object-fit: cover;
+        }
+
+        .movie-card:hover img {
+            transform: scale(1.05);
         }
 
         .movie-card-info {
@@ -167,15 +215,18 @@
 
         .movie-card-title {
             font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         footer {
             background-color: var(--bg-secondary);
             text-align: center;
-            padding: 1rem;
-            color: var(--text-sub);
+            padding: 1.5rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
             margin-top: auto;
         }
     </style>
@@ -185,7 +236,7 @@
     <header>
         <a href="#" class="logo" onclick="showCatalog()">ToonVault</a>
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن فيلم..." oninput="handleSearch()">
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن فيلمك المفضل..." oninput="handleSearch()">
         </div>
         <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
     </header>
@@ -195,12 +246,14 @@
             <div class="video-container">
                 <iframe id="videoPlayer" src="" allowfullscreen></iframe>
             </div>
-            <h2 id="movieTitle" class="movie-title"></h2>
-            <p id="movieStory" class="movie-story"></p>
+            <div class="movie-details">
+                <h2 id="movieTitle" class="movie-title"></h2>
+                <p id="movieStory" class="movie-story"></p>
+            </div>
         </section>
 
         <section id="catalogSection">
-            <h2 style="margin-bottom: 20px;">الأفلام المتاحة</h2>
+            <h2 class="section-title">🎬 أحدث الأفلام والكرتون</h2>
             <div id="moviesGrid" class="movies-grid"></div>
         </section>
     </main>
@@ -214,10 +267,10 @@
             {
                 id: 1,
                 title: "مدغشقر - الجزء الأول (Madagascar 1)",
-                searchKeywords: "madagascar 1 مدغشقر الاول مدغشقر1",
+                searchKeywords: "madagascar 1 مدغشقر الاول مدغشقر1 كرتون اسد حمار زرافة",
                 embedUrl: "https://ok.ru/videoembed/16790743616119",
-                image: "https://via.placeholder.com/200x280?text=Madagascar+1",
-                story: "يدور الجزء الأول حول أربعة حيوانات من حديقة حيوان سنترال بارك في نيويورك يجدون أنفسهم بالخطأ في براري جزيرة مدغشقر، ويحاولون التكيف مع الحياة الطبيعية والهروب بمساعدة البطاريق."
+                image: "https://m.media-amazon.com/images/M/MVBMTYwOTI5NTkyN15BMl5BanBnXkFtZTcwNDU1MTcyMQ@@._V1_FMjpg_UX1000_.jpg",
+                story: "تدور الأحداث حول أربعة حيوانات من حديقة حيوان سنترال بارك في نيويورك (الأسد أليكس، الزرافة ملمان، الحمار الوحشي مورتي، والخرتيت/فرس النهر جلوريا) يجدون أنفسهم بالخطأ في براري جزيرة مدغشقر، ويحاولون التكيف مع الحياة الطبيعية والهروب بمساعدة مجموعة بطاريق مغامرة."
             }
         ];
 
@@ -225,7 +278,7 @@
             const grid = document.getElementById('moviesGrid');
             grid.innerHTML = '';
             if(list.length === 0) {
-                grid.innerHTML = '<p>لا توجد نتائج بحث مطابقة.</p>';
+                grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1;">عذراً، لم نجد أي فيلم بهذا الاسم.</p>';
                 return;
             }
             list.forEach(movie => {
@@ -233,7 +286,9 @@
                 card.className = 'movie-card';
                 card.onclick = () => playMovie(movie);
                 card.innerHTML = `
-                    <img src="${movie.image}" alt="${movie.title}">
+                    <div class="poster-wrapper">
+                        <img src="${movie.image}" alt="${movie.title}" loading="lazy">
+                    </div>
                     <div class="movie-card-info">
                         <div class="movie-card-title">${movie.title}</div>
                     </div>
