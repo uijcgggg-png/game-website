@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToonVault - عالم الكرتون والأنيميشن</title>
+    <title>ToonVault 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #05070f;
-            --bg-secondary: #0b0f19;
-            --bg-card: #111827;
-            --accent-1: #00f2fe;
-            --accent-2: #4facfe;
-            --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --accent: #00f2fe;
             --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border: #1f2937;
-            --glow: 0 0 15px rgba(0, 242, 254, 0.6), 0 0 30px rgba(0, 242, 254, 0.3);
+            --text-muted: #9ca3af;
+            --border: #374151;
         }
 
         [data-theme="light"] {
-            --bg-primary: #f8fafc;
+            --bg-primary: #f3f4f6;
             --bg-secondary: #ffffff;
             --bg-card: #ffffff;
-            --accent-1: #0284c7;
-            --accent-2: #0ea5e9;
-            --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --glow: 0 0 10px rgba(2, 132, 199, 0.4);
+            --accent: #0284c7;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
         }
 
         * {
@@ -37,7 +31,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
@@ -46,76 +39,80 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
+        /* Header */
         header {
             background-color: var(--bg-secondary);
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--border);
         }
 
         .logo {
-            font-size: 2.3rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent);
             text-decoration: none;
-            letter-spacing: 2px;
             cursor: pointer;
-            text-shadow: none;
-            filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.8));
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
         }
 
-        .header-controls {
+        .header-actions {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
-        .search-container {
-            flex-grow: 1;
-            max-width: 450px;
-            margin: 0 20px;
+        .btn-small {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Search Section */
+        .search-bar-section {
+            padding: 1.5rem 1rem 0.5rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 20px;
-            border-radius: 30px;
+            padding: 12px 18px;
+            border-radius: 10px;
             border: 2px solid var(--border);
-            background-color: var(--bg-primary);
+            background-color: var(--bg-secondary);
             color: var(--text-main);
             outline: none;
             font-size: 1rem;
         }
 
         .search-input:focus {
-            border-color: var(--accent-1);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            border-color: var(--accent);
         }
 
-        .notif-btn, .theme-toggle {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            padding: 10px 14px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--text-main);
-            position: relative;
-        }
-
+        /* Main Grid */
         main {
-            padding: 2.5rem;
-            max-width: 1350px;
+            padding: 1.5rem;
+            max-width: 1200px;
             margin: 0 auto;
             width: 100%;
             flex-grow: 1;
@@ -123,12 +120,11 @@
 
         .player-section {
             display: none;
-            margin-bottom: 3.5rem;
+            margin-bottom: 2rem;
             background-color: var(--bg-secondary);
-            padding: 28px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 12px;
             border: 1px solid var(--border);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
         .video-container {
@@ -136,205 +132,138 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            border-radius: 14px;
+            border-radius: 8px;
             background-color: #000;
         }
 
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border: 0;
         }
 
-        .movie-details {
-            margin-top: 25px;
-        }
-
         .movie-title {
-            font-size: 1.9rem;
-            font-weight: 900;
-            color: var(--text-main);
-            margin-bottom: 12px;
+            font-size: 1.5rem;
+            margin: 15px 0 10px 0;
         }
 
         .movie-story {
             color: var(--text-muted);
-            line-height: 2;
-            font-size: 1.1rem;
+            line-height: 1.7;
             background: var(--bg-primary);
-            padding: 20px;
-            border-radius: 12px;
-            border-right: 5px solid var(--accent-1);
+            padding: 15px;
+            border-radius: 8px;
         }
 
         .back-btn {
-            background: var(--accent-gradient);
-            color: #fff;
+            background: var(--accent);
+            color: #000;
             border: none;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 15px;
         }
 
         .section-title {
-            font-size: 1.6rem;
-            margin-bottom: 2rem;
-            font-weight: 900;
-            border-right: 4px solid var(--accent-1);
-            padding-right: 12px;
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            border-right: 4px solid var(--accent);
+            padding-right: 10px;
         }
 
         .movies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
 
         .movie-card {
             background-color: var(--bg-card);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
             border: 1px solid var(--border);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .movie-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-1);
-            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.3);
+            border-color: var(--accent);
         }
 
         .poster-wrapper {
             width: 100%;
-            height: 320px;
-            background: linear-gradient(135deg, #0f172a 100%, #1e293b 0%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-1);
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 20px;
-            border-bottom: 1px solid var(--border);
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .movie-card-info {
-            padding: 18px;
+            padding: 12px;
         }
 
         .movie-card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .movie-badge {
-            font-size: 0.85rem;
-            color: var(--accent-1);
-            font-weight: bold;
-        }
-
-        .not-found-container {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 2rem;
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            border: 1px dashed var(--border);
-        }
-
-        .request-btn {
-            background: var(--accent-gradient);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
             font-size: 1rem;
             font-weight: 700;
-            cursor: pointer;
-            margin-top: 15px;
         }
 
-        /* Support Floating Button & Modal */
-        .support-float-btn {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--accent-gradient);
-            color: white;
-            border: none;
-            padding: 14px 22px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.4);
-            z-index: 999;
-        }
-
+        /* Modals */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             z-index: 10000;
             justify-content: center;
             align-items: center;
+            padding: 15px;
         }
 
         .modal-content {
             background: var(--bg-secondary);
-            padding: 30px;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 450px;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
             border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .modal-content h3 {
-            margin-bottom: 15px;
-            color: var(--accent-1);
         }
 
         .modal-content input, .modal-content textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 12px;
             background: var(--bg-primary);
             border: 1px solid var(--border);
             color: var(--text-main);
-            border-radius: 8px;
+            border-radius: 6px;
             outline: none;
         }
 
         .modal-content button {
-            background: var(--accent-gradient);
-            color: white;
+            background: var(--accent);
+            color: #000;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        /* Footer */
         footer {
             background-color: var(--bg-secondary);
             text-align: center;
-            padding: 1.8rem;
+            padding: 1.2rem;
             color: var(--text-muted);
             border-top: 1px solid var(--border);
             margin-top: auto;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -342,18 +271,20 @@
 
     <header>
         <div class="logo" onclick="showCatalog()">ToonVault</div>
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن فيلمك المفضل..." oninput="handleSearch()">
-        </div>
-        <div class="header-controls">
-            <button class="notif-btn" onclick="toggleNotifications()" title="الإشعارات">🔔</button>
-            <button class="theme-toggle" onclick="toggleTheme()" title="تغيير المظهر">🌙</button>
+        <div class="header-actions">
+            <button class="btn-small" onclick="openSupportModal()">🎫 تذكرة</button>
+            <button class="btn-small" onclick="toggleNotifications()">🔔</button>
+            <button class="btn-small" onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
+    <div class="search-bar-section">
+        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن اسم الفيلم..." oninput="handleSearch()">
+    </div>
+
     <main>
         <section id="playerSection" class="player-section">
-            <button class="back-btn" onclick="showCatalog()">⬅ العودة لقائمة الأفلام</button>
+            <button class="back-btn" onclick="showCatalog()">⬅ العودة للقائمة</button>
             <div class="video-container">
                 <iframe id="videoPlayer" src="" allowfullscreen></iframe>
             </div>
@@ -364,51 +295,45 @@
         </section>
 
         <section id="catalogSection">
-            <h2 class="section-title">🎬 أحدث الأفلام والكرتون المدبلج</h2>
+            <h2 class="section-title">الأفلام المتاحة</h2>
             <div id="moviesGrid" class="movies-grid"></div>
         </section>
     </main>
 
-    <!-- Support Floating Button -->
-    <button class="support-float-btn" onclick="openSupportModal()">💬 تواصل مع الدعم</button>
-
-    <!-- Support Modal -->
+    <!-- Support / Owner Modal -->
     <div id="supportModal" class="modal-overlay">
         <div class="modal-content">
-            <h3>تواصل مع دعم ToonVault</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">اكتب اسمك وشكواك أو طلبك، وسيتم فتح تذكرة جديدة. (للأونر: اكتب كلمة المرور في خانة الاسم للوصول للوحة التحكم).</p>
-            <input type="text" id="ticketName" placeholder="اسمك الكريم (أو باسورد الأونر)">
-            <textarea id="ticketMessage" rows="4" placeholder="اكتب شكواك أو استفسارك هنا..."></textarea>
-            <div style="display: flex; gap: 10px;">
-                <button onclick="submitTicket()">إرسال التذكرة</button>
-                <button onclick="closeSupportModal()" style="background: #ef4444;">إغلاق</button>
+            <h3 style="color: var(--accent);">الدعم والشكاوى</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">اكتب اسمك وشكواك لفتح تذكرة. (للأونر: اكتب الباسورد في خانة الاسم).</p>
+            <input type="text" id="ticketName" placeholder="الاسم (أو كلمة سر الأونر)">
+            <textarea id="ticketMessage" rows="3" placeholder="اكتب رسالتك هنا..."></textarea>
+            <div style="display:flex; gap:10px;">
+                <button onclick="submitTicket()">إرسال</button>
+                <button onclick="closeSupportModal()" style="background:#ef4444; color:#fff;">إغلاق</button>
             </div>
         </div>
     </div>
 
-    <!-- Owner Dashboard Modal -->
+    <!-- Owner Dashboard -->
     <div id="ownerModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 600px;">
-            <h3>👑 لوحة تحكم الأونر (التذاكر المفتوحة)</h3>
-            <div id="ticketsList" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px; background: var(--bg-primary); padding: 10px; border-radius: 8px;"></div>
-            <button onclick="closeOwnerModal()">إغلاق اللوحة</button>
+        <div class="modal-content" style="max-width: 500px;">
+            <h3 style="color: var(--accent);">لوحة تحكم الأونر</h3>
+            <div id="ticketsList" style="max-height: 250px; overflow-y: auto; margin: 15px 0; background: var(--bg-primary); padding: 10px; border-radius: 6px;"></div>
+            <button onclick="closeOwnerModal()">إغلاق</button>
         </div>
     </div>
 
     <!-- Notifications Modal -->
     <div id="notifModal" class="modal-overlay">
         <div class="modal-content">
-            <h3>🔔 آخر التحديثات والإشعارات</h3>
-            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
-                • تم إضافة فيلم <b>مدغشقر الجزء الأول</b> بجودة عالية وبدون إعلانات مزعجة.<br>
-                • ترقبوا المزيد من الأفلام والكرتون قريباً حصرياً على ToonVault!
-            </p>
+            <h3 style="color: var(--accent);">الإشعارات</h3>
+            <p style="margin: 15px 0; color: var(--text-muted); font-size: 0.95rem;">• تم إضافة فيلم مدغشقر الجزء الأول مدبلج بالعربي.</p>
             <button onclick="toggleNotifications()">إغلاق</button>
         </div>
     </div>
 
     <footer>
-        <p>جميع الحقوق محفوظة &copy; ToonVault 2026 | تطوير وإدارة: أحمد (AhmedFox)</p>
+        <p>جميع الحقوق محفوظة &copy; ToonVault 2026</p>
     </footer>
 
     <script>
@@ -416,27 +341,21 @@
             {
                 id: 1,
                 title: "فيلم مدغشقر الجزء الأول مدبلج بالعربي (Madagascar 1)",
-                badge: "مدبلج رسمي • جودة عالية",
                 searchKeywords: "madagascar 1 مدغشقر الجزء الاول مدبلج اسد حمار زرافة بطاريق",
                 embedUrl: "https://ok.ru/videoembed/16790743616119",
-                story: "تدور أحداث القصة في جو مليء بالكوميديا والمغامرة الحماسية حول أربعة حيوانات من حديقة حيوان سنترال بارك الشهيرة في مدينة نيويورك: الأسد أليكس النجم المفضّل للزوار، الزرافة ملمان القلق دائماً، الحمار الوحشي مورتي المشاكس، والفرس القوية جلوريا. يجد الأصدقاء الأربعة أنفسهم بالخطأ في صناديق وسط البحر ومنها إلى براري جزيرة مدغشقر المتوحشة والساحرة، حيث يتعرفون على ملك الليمور المجنون ويبدأون رحلة الكفاح والتكيف مع الحياة البرية لأول مرة بعيداً عن أمان حديقة الحيوان."
+                image: "https://images.justwatch.com/poster/8655810/s718/madagascar-1.jpg",
+                story: "تدور أحداث القصة حول أربعة حيوانات من حديقة حيوان سنترال بارك في نيويورك: الأسد أليكس، الزرافة ملمان، الحمار الوحشي مورتي، والفرس جلوريا. يجد الأصدقاء أنفسهم بالخطأ في صناديق وسط البحر ومنها إلى براري جزيرة مدغشقر."
             }
         ];
 
         let tickets = JSON.parse(localStorage.getItem('toonvault_tickets')) || [];
 
-        function renderMovies(list, query = "") {
+        function renderMovies(list) {
             const grid = document.getElementById('moviesGrid');
             grid.innerHTML = '';
             
             if(list.length === 0) {
-                grid.innerHTML = `
-                    <div class="not-found-container">
-                        <h3>عذراً، لا يتوفر فيلم باسم "${query}"</h3>
-                        <p>لم نجد أي نتائج مطابقة لبحثك.</p>
-                        <button class="request-btn" onclick="alert('تم إرسال طلبك بنجاح!')">لم تجد الفيلم المطلوب؟ اضغط هنا لطلبه</button>
-                    </div>
-                `;
+                grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center;">لا يتوفر فيلم بهذا الاسم حالياً.</p>';
                 return;
             }
 
@@ -446,11 +365,10 @@
                 card.onclick = () => playMovie(movie);
                 card.innerHTML = `
                     <div class="poster-wrapper">
-                        🎬<br><span style="font-size:0.9rem; margin-top:5px;">ToonVault Exclusive</span><br>${movie.title.split('(')[0]}
+                        <img src="${movie.image}" alt="${movie.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/200x280?text=ToonVault';">
                     </div>
                     <div class="movie-card-info">
                         <div class="movie-card-title">${movie.title}</div>
-                        <div class="movie-badge">${movie.badge}</div>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -479,13 +397,11 @@
                 renderMovies(movies);
                 return;
             }
-
-            const filtered = movies.filter(movie => {
-                const fullText = (movie.title + " " + movie.searchKeywords).toLowerCase();
-                return fullText.includes(query);
-            });
-
-            renderMovies(filtered, query);
+            const filtered = movies.filter(movie => 
+                movie.title.toLowerCase().includes(query) || 
+                movie.searchKeywords.toLowerCase().includes(query)
+            );
+            renderMovies(filtered);
         }
 
         function toggleTheme() {
@@ -512,12 +428,6 @@
             const name = document.getElementById('ticketName').value.trim();
             const message = document.getElementById('ticketMessage').value.trim();
 
-            if (!name || !message) {
-                alert('يرجى إدخال الاسم والرسالة أولاً!');
-                return;
-            }
-
-            // التحقق من باسورد الأونر
             if (name === 'Ahmedfox22') {
                 closeSupportModal();
                 openOwnerDashboard();
@@ -526,9 +436,14 @@
                 return;
             }
 
+            if (!name || !message) {
+                alert('يرجى كتابة الاسم والرسالة أولاً!');
+                return;
+            }
+
             tickets.push({ name, message, date: new Date().toLocaleString() });
             localStorage.setItem('toonvault_tickets', JSON.stringify(tickets));
-            alert('تم إرسال تذكرتك بنجاح وسيتم الرد عليك قريباً!');
+            alert('تم إرسال تذكرتك بنجاح!');
             document.getElementById('ticketName').value = '';
             document.getElementById('ticketMessage').value = '';
             closeSupportModal();
@@ -539,14 +454,14 @@
             listDiv.innerHTML = '';
             
             if (tickets.length === 0) {
-                listDiv.innerHTML = '<p style="color: var(--text-muted); text-align:center;">لا توجد تذاكر مفتوحة حالياً.</p>';
+                listDiv.innerHTML = '<p style="color: var(--text-muted); text-align:center;">لا توجد تذاكر حالياً.</p>';
             } else {
                 tickets.forEach((t, index) => {
                     listDiv.innerHTML += `
-                        <div style="background: var(--bg-secondary); padding: 10px; border-radius: 6px; margin-bottom: 8px; border-right: 3px solid var(--accent-1);">
-                            <b>المرسل:</b> ${t.name} <span style="font-size:0.8rem; color:var(--text-muted);">(${t.date})</span><br>
-                            <b>الشكوى:</b> ${t.message}<br>
-                            <button onclick="deleteTicket(${index})" style="background:#ef4444; padding:4px 10px; font-size:0.8rem; margin-top:5px;">حذف / إغلاق التذكرة</button>
+                        <div style="background: var(--bg-secondary); padding: 8px; border-radius: 6px; margin-bottom: 8px; border-right: 3px solid var(--accent); font-size: 0.9rem;">
+                            <b>المرسل:</b> ${t.name}<br>
+                            <b>الرسالة:</b> ${t.message}<br>
+                            <button onclick="deleteTicket(${index})" style="background:#ef4444; color:#fff; padding:3px 8px; font-size:0.75rem; margin-top:5px; border:none; border-radius:4px; cursor:pointer;">حذف</button>
                         </div>
                     `;
                 });
