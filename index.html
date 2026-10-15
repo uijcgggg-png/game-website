@@ -7,16 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #070913;
-            --bg-secondary: #0f1322;
-            --bg-card: #161b33;
+            --bg-primary: #05070f;
+            --bg-secondary: #0b0f19;
+            --bg-card: #111827;
             --accent-1: #00f2fe;
             --accent-2: #4facfe;
             --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
             --text-main: #ffffff;
             --text-muted: #94a3b8;
-            --border: #1e293b;
-            --glow: rgba(0, 242, 254, 0.25);
+            --border: #1f2937;
+            --glow: 0 0 15px rgba(0, 242, 254, 0.6), 0 0 30px rgba(0, 242, 254, 0.3);
         }
 
         [data-theme="light"] {
@@ -29,7 +29,7 @@
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --glow: rgba(2, 132, 199, 0.2);
+            --glow: 0 0 10px rgba(2, 132, 199, 0.4);
         }
 
         * {
@@ -62,20 +62,28 @@
         }
 
         .logo {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             font-weight: 900;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             cursor: pointer;
+            text-shadow: none;
+            filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.8));
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .search-container {
             flex-grow: 1;
-            max-width: 500px;
-            margin: 0 25px;
+            max-width: 450px;
+            margin: 0 20px;
         }
 
         .search-input {
@@ -91,10 +99,10 @@
 
         .search-input:focus {
             border-color: var(--accent-1);
-            box-shadow: 0 0 15px var(--glow);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
-        .theme-toggle {
+        .notif-btn, .theme-toggle {
             background: var(--bg-primary);
             border: 1px solid var(--border);
             padding: 10px 14px;
@@ -102,6 +110,7 @@
             font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-main);
+            position: relative;
         }
 
         main {
@@ -145,7 +154,7 @@
         }
 
         .movie-title {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 900;
             color: var(--text-main);
             margin-bottom: 12px;
@@ -153,8 +162,8 @@
 
         .movie-story {
             color: var(--text-muted);
-            line-height: 1.9;
-            font-size: 1.05rem;
+            line-height: 2;
+            font-size: 1.1rem;
             background: var(--bg-primary);
             padding: 20px;
             border-radius: 12px;
@@ -199,22 +208,23 @@
         .movie-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent-1);
-            box-shadow: 0 12px 30px var(--glow);
+            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.3);
         }
 
         .poster-wrapper {
             width: 100%;
             height: 320px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #0f172a 100%, #1e293b 0%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: var(--accent-1);
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-align: center;
             padding: 20px;
+            border-bottom: 1px solid var(--border);
         }
 
         .movie-card-info {
@@ -254,6 +264,70 @@
             margin-top: 15px;
         }
 
+        /* Support Floating Button & Modal */
+        .support-float-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.4);
+            z-index: 999;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: var(--accent-1);
+        }
+
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .modal-content button {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Footer */
         footer {
             background-color: var(--bg-secondary);
             text-align: center;
@@ -271,7 +345,10 @@
         <div class="search-container">
             <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن فيلمك المفضل..." oninput="handleSearch()">
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <div class="header-controls">
+            <button class="notif-btn" onclick="toggleNotifications()" title="الإشعارات">🔔</button>
+            <button class="theme-toggle" onclick="toggleTheme()" title="تغيير المظهر">🌙</button>
+        </div>
     </header>
 
     <main>
@@ -292,8 +369,46 @@
         </section>
     </main>
 
+    <!-- Support Floating Button -->
+    <button class="support-float-btn" onclick="openSupportModal()">💬 تواصل مع الدعم</button>
+
+    <!-- Support Modal -->
+    <div id="supportModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>تواصل مع دعم ToonVault</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">اكتب اسمك وشكواك أو طلبك، وسيتم فتح تذكرة جديدة. (للأونر: اكتب كلمة المرور في خانة الاسم للوصول للوحة التحكم).</p>
+            <input type="text" id="ticketName" placeholder="اسمك الكريم (أو باسورد الأونر)">
+            <textarea id="ticketMessage" rows="4" placeholder="اكتب شكواك أو استفسارك هنا..."></textarea>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="submitTicket()">إرسال التذكرة</button>
+                <button onclick="closeSupportModal()" style="background: #ef4444;">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Owner Dashboard Modal -->
+    <div id="ownerModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 600px;">
+            <h3>👑 لوحة تحكم الأونر (التذاكر المفتوحة)</h3>
+            <div id="ticketsList" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px; background: var(--bg-primary); padding: 10px; border-radius: 8px;"></div>
+            <button onclick="closeOwnerModal()">إغلاق اللوحة</button>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div id="notifModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>🔔 آخر التحديثات والإشعارات</h3>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+                • تم إضافة فيلم <b>مدغشقر الجزء الأول</b> بجودة عالية وبدون إعلانات مزعجة.<br>
+                • ترقبوا المزيد من الأفلام والكرتون قريباً حصرياً على ToonVault!
+            </p>
+            <button onclick="toggleNotifications()">إغلاق</button>
+        </div>
+    </div>
+
     <footer>
-        <p>جميع الحقوق محفوظة &copy; ToonVault 2026</p>
+        <p>جميع الحقوق محفوظة &copy; ToonVault 2026 | تطوير وإدارة: أحمد (AhmedFox)</p>
     </footer>
 
     <script>
@@ -304,9 +419,11 @@
                 badge: "مدبلج رسمي • جودة عالية",
                 searchKeywords: "madagascar 1 مدغشقر الجزء الاول مدبلج اسد حمار زرافة بطاريق",
                 embedUrl: "https://ok.ru/videoembed/16790743616119",
-                story: "تدور أحداث القصة في جو مليء بالكوميديا والمغامرة حول أربعة حيوانات من حديقة حيوان سنترال بارك في نيويورك: الأسد أليكس، الزرافة ملمان، الحمار الوحشي مورتي، والفرس جلوريا. يجدون أنفسهم بالخطأ في صناديق وسط البحر ومنها إلى براري جزيرة مدغشقر المتوحشة، حيث يتعرفون على ملك الليمور ويحاولون التكيف مع الحياة البرية."
+                story: "تدور أحداث القصة في جو مليء بالكوميديا والمغامرة الحماسية حول أربعة حيوانات من حديقة حيوان سنترال بارك الشهيرة في مدينة نيويورك: الأسد أليكس النجم المفضّل للزوار، الزرافة ملمان القلق دائماً، الحمار الوحشي مورتي المشاكس، والفرس القوية جلوريا. يجد الأصدقاء الأربعة أنفسهم بالخطأ في صناديق وسط البحر ومنها إلى براري جزيرة مدغشقر المتوحشة والساحرة، حيث يتعرفون على ملك الليمور المجنون ويبدأون رحلة الكفاح والتكيف مع الحياة البرية لأول مرة بعيداً عن أمان حديقة الحيوان."
             }
         ];
+
+        let tickets = JSON.parse(localStorage.getItem('toonvault_tickets')) || [];
 
         function renderMovies(list, query = "") {
             const grid = document.getElementById('moviesGrid');
@@ -329,7 +446,7 @@
                 card.onclick = () => playMovie(movie);
                 card.innerHTML = `
                     <div class="poster-wrapper">
-                        🎬<br>${movie.title}
+                        🎬<br><span style="font-size:0.9rem; margin-top:5px;">ToonVault Exclusive</span><br>${movie.title.split('(')[0]}
                     </div>
                     <div class="movie-card-info">
                         <div class="movie-card-title">${movie.title}</div>
@@ -376,6 +493,75 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             document.body.setAttribute('data-theme', newTheme);
             document.querySelector('.theme-toggle').innerText = newTheme === 'light' ? '☀️' : '🌙';
+        }
+
+        function openSupportModal() {
+            document.getElementById('supportModal').style.display = 'flex';
+        }
+
+        function closeSupportModal() {
+            document.getElementById('supportModal').style.display = 'none';
+        }
+
+        function toggleNotifications() {
+            const modal = document.getElementById('notifModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function submitTicket() {
+            const name = document.getElementById('ticketName').value.trim();
+            const message = document.getElementById('ticketMessage').value.trim();
+
+            if (!name || !message) {
+                alert('يرجى إدخال الاسم والرسالة أولاً!');
+                return;
+            }
+
+            // التحقق من باسورد الأونر
+            if (name === 'Ahmedfox22') {
+                closeSupportModal();
+                openOwnerDashboard();
+                document.getElementById('ticketName').value = '';
+                document.getElementById('ticketMessage').value = '';
+                return;
+            }
+
+            tickets.push({ name, message, date: new Date().toLocaleString() });
+            localStorage.setItem('toonvault_tickets', JSON.stringify(tickets));
+            alert('تم إرسال تذكرتك بنجاح وسيتم الرد عليك قريباً!');
+            document.getElementById('ticketName').value = '';
+            document.getElementById('ticketMessage').value = '';
+            closeSupportModal();
+        }
+
+        function openOwnerDashboard() {
+            const listDiv = document.getElementById('ticketsList');
+            listDiv.innerHTML = '';
+            
+            if (tickets.length === 0) {
+                listDiv.innerHTML = '<p style="color: var(--text-muted); text-align:center;">لا توجد تذاكر مفتوحة حالياً.</p>';
+            } else {
+                tickets.forEach((t, index) => {
+                    listDiv.innerHTML += `
+                        <div style="background: var(--bg-secondary); padding: 10px; border-radius: 6px; margin-bottom: 8px; border-right: 3px solid var(--accent-1);">
+                            <b>المرسل:</b> ${t.name} <span style="font-size:0.8rem; color:var(--text-muted);">(${t.date})</span><br>
+                            <b>الشكوى:</b> ${t.message}<br>
+                            <button onclick="deleteTicket(${index})" style="background:#ef4444; padding:4px 10px; font-size:0.8rem; margin-top:5px;">حذف / إغلاق التذكرة</button>
+                        </div>
+                    `;
+                });
+            }
+            document.getElementById('ownerModal').style.display = 'flex';
+        }
+
+        function closeOwnerModal() {
+            document.getElementById('ownerModal').style.display = 'none';
+        }
+
+        function deleteTicket(index) {
+            tickets.splice(index, 1);
+            localStorage.setItem('toonvault_tickets', JSON.stringify(tickets));
+            openOwnerDashboard();
         }
 
         renderMovies(movies);
