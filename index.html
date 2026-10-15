@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToonVault - عالم الكرتون والأنيميشن الاحترافي</title>
+    <title>ToonVault - عالم الكرتون والأنيميشن</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -48,7 +48,6 @@
             flex-direction: column;
         }
 
-        /* Header Style */
         header {
             background-color: var(--bg-secondary);
             padding: 1.2rem 2.5rem;
@@ -70,19 +69,18 @@
             -webkit-text-fill-color: transparent;
             text-decoration: none;
             letter-spacing: 1.5px;
-            filter: drop-shadow(0 0 10px var(--glow));
+            cursor: pointer;
         }
 
         .search-container {
             flex-grow: 1;
             max-width: 500px;
             margin: 0 25px;
-            position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 14px 22px;
+            padding: 12px 20px;
             border-radius: 30px;
             border: 2px solid var(--border);
             background-color: var(--bg-primary);
@@ -106,7 +104,6 @@
             color: var(--text-main);
         }
 
-        /* Main Container */
         main {
             padding: 2.5rem;
             max-width: 1350px;
@@ -115,7 +112,6 @@
             flex-grow: 1;
         }
 
-        /* Player Section */
         .player-section {
             display: none;
             margin-bottom: 3.5rem;
@@ -133,7 +129,6 @@
             overflow: hidden;
             border-radius: 14px;
             background-color: #000;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
         }
 
         .video-container iframe {
@@ -150,7 +145,7 @@
         }
 
         .movie-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: var(--text-main);
             margin-bottom: 12px;
@@ -159,7 +154,7 @@
         .movie-story {
             color: var(--text-muted);
             line-height: 1.9;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             background: var(--bg-primary);
             padding: 20px;
             border-radius: 12px;
@@ -176,17 +171,12 @@
             cursor: pointer;
             margin-bottom: 20px;
             font-size: 1rem;
-            box-shadow: 0 5px 15px var(--glow);
         }
 
-        /* Catalog Grid */
         .section-title {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             margin-bottom: 2rem;
             font-weight: 900;
-            display: flex;
-            align-items: center;
-            gap: 12px;
             border-right: 4px solid var(--accent-1);
             padding-right: 12px;
         }
@@ -203,7 +193,6 @@
             overflow: hidden;
             cursor: pointer;
             border: 1px solid var(--border);
-            position: relative;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
@@ -215,20 +204,181 @@
 
         .poster-wrapper {
             width: 100%;
-            height: 330px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .movie-card:hover img {
-            transform: scale(1.06);
+            height: 320px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-1);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 20px;
         }
 
         .movie-card-info {
+            padding: 18px;
+        }
+
+        .movie-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .movie-badge {
+            font-size: 0.85rem;
+            color: var(--accent-1);
+            font-weight: bold;
+        }
+
+        .not-found-container {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 1px dashed var(--border);
+        }
+
+        .request-btn {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            text-align: center;
+            padding: 1.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="showCatalog()">ToonVault</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن فيلمك المفضل..." oninput="handleSearch()">
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </header>
+
+    <main>
+        <section id="playerSection" class="player-section">
+            <button class="back-btn" onclick="showCatalog()">⬅ العودة لقائمة الأفلام</button>
+            <div class="video-container">
+                <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+            </div>
+            <div class="movie-details">
+                <h2 id="movieTitle" class="movie-title"></h2>
+                <p id="movieStory" class="movie-story"></p>
+            </div>
+        </section>
+
+        <section id="catalogSection">
+            <h2 class="section-title">🎬 أحدث الأفلام والكرتون المدبلج</h2>
+            <div id="moviesGrid" class="movies-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; ToonVault 2026</p>
+    </footer>
+
+    <script>
+        const movies = [
+            {
+                id: 1,
+                title: "فيلم مدغشقر الجزء الأول مدبلج بالعربي (Madagascar 1)",
+                badge: "مدبلج رسمي • جودة عالية",
+                searchKeywords: "madagascar 1 مدغشقر الجزء الاول مدبلج اسد حمار زرافة بطاريق",
+                embedUrl: "https://ok.ru/videoembed/16790743616119",
+                story: "تدور أحداث القصة في جو مليء بالكوميديا والمغامرة حول أربعة حيوانات من حديقة حيوان سنترال بارك في نيويورك: الأسد أليكس، الزرافة ملمان، الحمار الوحشي مورتي، والفرس جلوريا. يجدون أنفسهم بالخطأ في صناديق وسط البحر ومنها إلى براري جزيرة مدغشقر المتوحشة، حيث يتعرفون على ملك الليمور ويحاولون التكيف مع الحياة البرية."
+            }
+        ];
+
+        function renderMovies(list, query = "") {
+            const grid = document.getElementById('moviesGrid');
+            grid.innerHTML = '';
             
+            if(list.length === 0) {
+                grid.innerHTML = `
+                    <div class="not-found-container">
+                        <h3>عذراً، لا يتوفر فيلم باسم "${query}"</h3>
+                        <p>لم نجد أي نتائج مطابقة لبحثك.</p>
+                        <button class="request-btn" onclick="alert('تم إرسال طلبك بنجاح!')">لم تجد الفيلم المطلوب؟ اضغط هنا لطلبه</button>
+                    </div>
+                `;
+                return;
+            }
+
+            list.forEach(movie => {
+                const card = document.createElement('div');
+                card.className = 'movie-card';
+                card.onclick = () => playMovie(movie);
+                card.innerHTML = `
+                    <div class="poster-wrapper">
+                        🎬<br>${movie.title}
+                    </div>
+                    <div class="movie-card-info">
+                        <div class="movie-card-title">${movie.title}</div>
+                        <div class="movie-badge">${movie.badge}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function playMovie(movie) {
+            document.getElementById('videoPlayer').src = movie.embedUrl;
+            document.getElementById('movieTitle').innerText = movie.title;
+            document.getElementById('movieStory').innerText = movie.story;
+            document.getElementById('playerSection').style.display = 'block';
+            document.getElementById('catalogSection').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showCatalog() {
+            document.getElementById('playerSection').style.display = 'none';
+            document.getElementById('catalogSection').style.display = 'block';
+            document.getElementById('videoPlayer').src = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if(!query) {
+                renderMovies(movies);
+                return;
+            }
+
+            const filtered = movies.filter(movie => {
+                const fullText = (movie.title + " " + movie.searchKeywords).toLowerCase();
+                return fullText.includes(query);
+            });
+
+            renderMovies(filtered, query);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', newTheme);
+            document.querySelector('.theme-toggle').innerText = newTheme === 'light' ? '☀️' : '🌙';
+        }
+
+        renderMovies(movies);
+    </script>
+</body>
+</html>
